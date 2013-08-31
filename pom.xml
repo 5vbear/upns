@@ -9,7 +9,7 @@
 	</parent>
 
 	<groupId>com.myctu.platform.components</groupId>
-	<artifactId>notification</artifactId>
+	<artifactId>upns</artifactId>
 	<version>0.1</version>
 
 	<name>${project.artifactId}</name>
@@ -17,10 +17,10 @@
 	<url>http://maven.apache.org</url>
 
 	<modules>
-		<module>console</module>
-		<module>protocol</module>
 		<module>multiplex-server</module>
 		<module>node-server</module>
+		<module>console</module>
+		<module>protocol</module>
 		<module>android</module>
 	</modules>
 
@@ -33,7 +33,7 @@
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
-		
+
 		<repository>
 			<id>myctu.repository.release</id>
 			<url>http://218.1.73.6/nexus/content/repositories/release</url>
