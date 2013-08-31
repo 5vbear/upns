@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>com.myctu.platform.components</groupId>
-		<artifactId>notification</artifactId>
+		<artifactId>upns</artifactId>
 		<version>0.1</version>
 	</parent>
 
