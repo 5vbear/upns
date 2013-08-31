@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+	default-lazy-init="false" default-autowire="no">
+
+	<bean id="unps.pubsub.redisClient" class="com.myctu.platform.gateway.agent.cache.redis.RedisClientFactoryBean">
+		<property name="cacheName" value="ctu.upns.pubsub" />
+		<property name="invoker" value="2" />
+		<property name="provider" value="5" />
+		<property name="gateway_uri" value="${ctu.gateway.uri}" />
+		<property name="default_host" value="${ctu.cache.reids.default.host}" />
+		<property name="default_port" value="${ctu.cache.reids.default.port}" />
+		<property name="default_dbindex" value="${ctu.cache.reids.default.db}" />
+	</bean>
+    
+    <!-- 
+	<bean id="pubSubService" class="com.myctu.platform.gateway.agent.pubsub.redis.PubSubServiceImpl">
+		<property name="redisClient" ref="redisClient" />
+	</bean>
+	-->
+
+	<bean id="pubSubService" class="com.myctu.platform.gateway.agent.pubsub.vm.VMPubSubService" />
+
+</beans>

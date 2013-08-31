@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+	default-lazy-init="false" default-autowire="no">
+
+	<util:list id="ctu.upns.channel.interceptors">
+		<ref bean="ctu.upns.channel.interceptor.logger" />
+	</util:list>
+
+
+	 <!--   
+	 *                                                 I/O Request
+	 *                                            via {@link Channel} or
+	 *                                        {@link ChannelHandlerContext}
+	 *                                                      |
+	 *  +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~+
+	 *  |                           ChannelPipeline         |               |
+	 *  |                                                  \|/              |
+	 *  |    +~~~~~~~~~~~~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |    | Inbound Handler  N  |            | Outbound Handler  1  |    |
+	 *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |              /|\                                  |               |
+	 *  |               |                                  \|/              |
+	 *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |    | Inbound Handler N~1 |            | Outbound Handler  2  |    |
+	 *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |              /|\                                  .               |
+	 *  |               .                                   .               |
+	 *  | ChannelHandlerContext.fireIN_EVT() ChannelHandlerContext.OUT_EVT()|
+	 *  |        [ method call]                       [method call]         |
+	 *  |               .                                   .               |
+	 *  |               .                                  \|/              |
+	 *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |    | protocolDecoder  2  |            |   protocolEncoder    |    |
+	 *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |              /|\                                  |               |
+	 *  |               |                                  \|/              |
+	 *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |    |   binaryDecoder  1  |            |     binaryEncoder    |    |
+	 *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+	 *  |              /|\                                  |               |
+	 *  +~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~+
+	 *                  |                                  \|/
+	 *  +~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~+
+	 *  |               |                                   |               |
+	 *  |       [ Socket.read() ]                    [ Socket.write() ]     |
+	 *  |                                                                   |
+	 *  |  Netty Internal I/O Threads (Transport Implementation)            |
+	 *  +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+	 -->
+	<util:map id="ctu.upns.channel.handlers" map-class="java.util.LinkedHashMap" value-type="java.lang.Class">
+		<!-- inbound -->
+		<entry key="binaryDecoder" value="com.telecom.ctu.platform.components.upns.node.endpoint.inbound.BinaryDecoder" />
+		<entry key="protocolDecoder" value="com.telecom.ctu.platform.components.upns.node.endpoint.inbound.ProtocolDecoder" />
+		<!-- outbound -->
+		<entry key="binaryEncoder" value="com.telecom.ctu.platform.components.upns.node.endpoint.outbound.BinaryEncoder" />
+		<entry key="protocolEncoder" value="com.telecom.ctu.platform.components.upns.node.endpoint.outbound.ProtocolEncoder" />
+		<!-- handler -->
+		<entry key="channelLifecycleHandler" value="com.telecom.ctu.platform.components.upns.node.endpoint.ChannelLifecycleHandler" />
+		<entry key="subscriberLifecycleHandler" value="com.telecom.ctu.platform.components.upns.node.endpoint.SubscriberLifecycleHandler" />
+		<entry key="protocolHandler" value="com.telecom.ctu.platform.components.upns.node.endpoint.ProtocolHandler" />
+	</util:map>
+
+</beans>
