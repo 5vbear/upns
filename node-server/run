@@ -1,7 +1,0 @@
-profile=$1
-
-CURRENT_DIR=`pwd`
-CLASSPATH="$CURRENT_DIR/resources:$CURRENT_DIR/profile/$profile:$CURRENT_DIR/lib/*:$CURRENT_DIR/components/*"
-
-chmod +x $CURRENT_DIR/profile/$profile/launcher
-$CURRENT_DIR/profile/$profile/launcher $profile $CLASSPATH 
