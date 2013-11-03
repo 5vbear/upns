@@ -1,0 +1,22 @@
+{
+  "name": "upns-server",
+  "version": "0.0.1",
+  "description": "mobile push server",
+  "main": "upns-server.js",
+  "scripts": {
+    "test": "make test"
+  },
+ 
+  "keywords": [
+    "nodejs",
+    "socket-push",
+    "http-push"
+  ],
+  "author": "pippo1980.du@gmail.com",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "3.4.4",
+    "jade": "*"
+  },
+  "devDependencies": {}
+}
