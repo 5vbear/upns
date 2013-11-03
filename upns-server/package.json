@@ -4,9 +4,9 @@
   "description": "mobile push server",
   "main": "upns-server.js",
   "scripts": {
+	"start": "node upns-server.js",
     "test": "make test"
   },
- 
   "keywords": [
     "nodejs",
     "socket-push",
@@ -18,5 +18,12 @@
     "express": "3.4.4",
     "jade": "*"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pippo1980/upns"
+  },
+  "bugs": {
+    "url": "https://github.com/pippo1980/upns/issues"
+  }
 }
