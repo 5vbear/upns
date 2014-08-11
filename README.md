@@ -35,5 +35,12 @@ UPNS(Unified Push Notification Serivce)
     1) enter ./upns-server/integration/target/profile/dev
     2) all settings in the file ctu.application.settings.properties
 
+##Performance
+    Hardware:kvm virtual machine as vcpu*4 memory=4g
+    Software:CentOS 6.4 and SUN JDK 1.7.0_45-b18
+
+    Test Case:30,000 long connection user, 1000 msg per second
+    Result:the avg msg ack small then 5 second
+
 
 
