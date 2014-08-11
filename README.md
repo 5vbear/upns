@@ -4,8 +4,7 @@ UPNS(Unified Push Notification Serivce)
     为IOS,Android,Web提供的统一消息推送服务
 
     It's based on [netty](http://netty.io/) and [redis](http://redis.io/).
-    The service contain
-
+##The service contain
     1) tcp server for android device
     2) embedded web socket server for browser device
     3) apple push connector for ios device
