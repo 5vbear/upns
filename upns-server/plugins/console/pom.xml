@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.sirius.upns.upns-server</groupId>
+        <artifactId>plugins</artifactId>
+        <version>2014-06-27</version>
+    </parent>
+
+    <artifactId>console</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-RELEASE</version>
+
+    <dependencies>
+
+        <!-- upns  -->
+        <dependency>
+            <groupId>com.sirius.upns.upns-server</groupId>
+            <artifactId>node</artifactId>
+            <version>1.9-GA</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- j2ee -->
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-jsp</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>myctu.repository.snapshot</id>
+            <url>http://218.1.73.6/nexus/content/repositories/snapshot</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>myctu.repository.release</id>
+            <url>http://218.1.73.6/nexus/content/repositories/release</url>
+        </repository>
+        <repository>
+            <id>main</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
+
+</project>

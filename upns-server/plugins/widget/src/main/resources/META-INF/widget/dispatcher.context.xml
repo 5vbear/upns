@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2010 www.myctu.cn. All rights reserved.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <import resource="classpath*:META-INF/ctu.application.support.mvc.context.xml"/>
+
+    <!-- 插件对应的项目源代码文件目录 -->
+    <context:component-scan base-package="com.sirius.upns.server.widget"/>
+
+    <!-- 静态资源路径  -->
+    <mvc:resources location="classpath:META-INF/widget/static/" mapping="/static/**" cache-period="3600"/>
+
+    <!-- 动态资源路径 -->
+    <bean parent="freeMarkerViewResolverTemplate">
+        <!-- 相对与[classpath:META-INF/]的相对路径 -->
+        <property name="prefix" value="widget/pages/"/>
+    </bean>
+
+    <!-- websocket -->
+    <bean class="com.sirius.upns.server.widget.websocket.endpoint.MessageHandlerRegistry">
+        <property name="jsonMessageHandler" ref="upnsMessageHandler"/>
+    </bean>
+</beans>

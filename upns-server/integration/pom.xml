@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sirius.upns</groupId>
+        <artifactId>upns-server</artifactId>
+        <version>2014-06-27</version>
+    </parent>
+
+    <groupId>com.sirius.upns.upns-server</groupId>
+    <artifactId>integration</artifactId>
+    <packaging>pom</packaging>
+    <version>2014-06-30</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sirius.upns.upns-server</groupId>
+            <artifactId>node</artifactId>
+            <version>${node.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sirius.upns.upns-server</groupId>
+            <artifactId>router</artifactId>
+            <version>${router.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sirius.upns.upns-server</groupId>
+            <artifactId>widget</artifactId>
+            <version>${widget.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sirius.upns.upns-server</groupId>
+            <artifactId>console</artifactId>
+            <version>${console.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
+                    <finalName>upns-server</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${basedir}/profile/dev</directory>
+                    </resource>
+                </resources>
+            </build>
+            <properties>
+                <node.version>1.9-GA</node.version>
+                <router.version>1.0-RELEASE</router.version>
+                <widget.version>1.0-RELEASE</widget.version>
+                <console.version>1.0-RELEASE</console.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>release</id>
+            <properties>
+                <node.version>1.9-GA</node.version>
+                <router.version>1.0-RELEASE</router.version>
+                <widget.version>1.0-RELEASE</widget.version>
+                <console.version>1.0-RELEASE</console.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>myctu.repository.snapshot</id>
+            <url>http://218.1.73.6/nexus/content/repositories/snapshot</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>myctu.repository.release</id>
+            <url>http://218.1.73.6/nexus/content/repositories/release</url>
+        </repository>
+    </repositories>
+</project>

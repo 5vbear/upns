@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.sirius.upns.upns-server</groupId>
+        <artifactId>plugins</artifactId>
+        <version>2014-06-27</version>
+    </parent>
+
+    <artifactId>node</artifactId>
+    <packaging>jar</packaging>
+    <version>1.9-GA</version>
+
+    <properties>
+        <!-- mongo -->
+        <jongo.version>0.4</jongo.version>
+        <!-- netty -->
+        <netty.version>4.0.7.Final</netty.version>
+        <!-- protocol -->
+        <msgpack.version>0.6.8</msgpack.version>
+        <!-- vibur object pooling  -->
+        <vibur.version>0.8.9</vibur.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- upns lib -->
+        <dependency>
+            <groupId>com.sirius.upns.upns-server</groupId>
+            <artifactId>router</artifactId>
+            <version>1.0-RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- mongodb -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongodb.driver.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jongo</groupId>
+            <artifactId>jongo</artifactId>
+            <version>${jongo.version}</version>
+        </dependency>
+
+        <!-- apns对接 -->
+        <dependency>
+            <groupId>com.github.fernandospr</groupId>
+            <artifactId>javapns-jdk16</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <!-- netty -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-buffer</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-socks</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-common</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-handler</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-rxtx</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-sctp</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        -->
+
+        <!--  内网可以考虑使用udt协议
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-udt</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        -->
+
+        <!-- 二进制包编码 -->
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack</artifactId>
+            <version>${msgpack.version}</version>
+        </dependency>
+
+        <!-- 连接池实现 -->
+        <dependency>
+            <groupId>org.vibur</groupId>
+            <artifactId>vibur-object-pool</artifactId>
+            <version>${vibur.version}</version>
+        </dependency>
+
+        <!-- test support -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-example</artifactId>
+            <version>${netty.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>myctu.repository.snapshot</id>
+            <url>http://218.1.73.6/nexus/content/repositories/snapshot</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>myctu.repository.release</id>
+            <url>http://218.1.73.6/nexus/content/repositories/release</url>
+        </repository>
+    </repositories>
+
+</project>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="no" default-lazy-init="false">
+
+    <context:component-scan base-package="com.sirius.upns.server.node"/>
+
+    <import resource="sirius.upns.node.engine.endpoint.context.xml"/>
+    <import resource="sirius.upns.node.engine.apns.context.xml"/>
+    <import resource="sirius.upns.node.module.queue.context.xml"/>
+    <import resource="sirius.upns.node.module.pubsub.context.xml"/>
+    <import resource="sirius.upns.node.support.mongo.context.xml"/>
+</beans>

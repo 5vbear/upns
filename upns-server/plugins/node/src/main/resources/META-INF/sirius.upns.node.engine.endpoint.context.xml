@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-autowire="no" default-lazy-init="false">
+
+    <util:list id="ctu.upns.server.node.channel.interceptors">
+        <ref bean="ctu.upns.node.server.channel.interceptor.logger"/>
+    </util:list>
+
+
+    <!--
+    *                                                 I/O Request
+    *                                            via {@link Channel} or
+    *                                        {@link ChannelHandlerContext}
+    *                                                      |
+    *  +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~+
+    *  |                           ChannelPipeline         |               |
+    *  |                                                  \|/              |
+    *  |    +~~~~~~~~~~~~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |    | Inbound Handler  N  |            | Outbound Handler  1  |    |
+    *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |              /|\                                  |               |
+    *  |               |                                  \|/              |
+    *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |    | Inbound Handler N~1 |            | Outbound Handler  2  |    |
+    *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |              /|\                                  .               |
+    *  |               .                                   .               |
+    *  | ChannelHandlerContext.fireIN_EVT() ChannelHandlerContext.OUT_EVT()|
+    *  |        [ method call]                       [method call]         |
+    *  |               .                                   .               |
+    *  |               .                                  \|/              |
+    *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |    | protocolDecoder  2  |            |   protocolEncoder    |    |
+    *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |              /|\                                  |               |
+    *  |               |                                  \|/              |
+    *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |    |   binaryDecoder  1  |            |     binaryEncoder    |    |
+    *  |    +~~~~~~~~~~+~~~~~~~~~~+            +~~~~~~~~~~~+~~~~~~~~~~+    |
+    *  |              /|\                                  |               |
+    *  +~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~+
+    *                  |                                  \|/
+    *  +~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~+
+    *  |               |                                   |               |
+    *  |       [ Socket.read() ]                    [ Socket.write() ]     |
+    *  |                                                                   |
+    *  |  Netty Internal I/O Threads (Transport Implementation)            |
+    *  +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+    -->
+    <util:map id="ctu.upns.node.server.channel.handlers" map-class="java.util.LinkedHashMap"
+              value-type="java.lang.Class">
+        <!-- inbound -->
+        <entry key="binaryDecoder"
+               value="com.sirius.upns.server.node.engine.endpoint.inbound.BinaryDecoder"/>
+        <entry key="protocolDecoder"
+               value="com.sirius.upns.server.node.engine.endpoint.inbound.ProtocolDecoder"/>
+        <!-- outbound -->
+        <entry key="binaryEncoder"
+               value="com.sirius.upns.server.node.engine.endpoint.outbound.BinaryEncoder"/>
+        <entry key="protocolEncoder"
+               value="com.sirius.upns.server.node.engine.endpoint.outbound.ProtocolEncoder"/>
+        <!-- handler -->
+        <entry key="channelLifecycleHandler"
+               value="com.sirius.upns.server.node.engine.endpoint.ChannelLifecycleHandler"/>
+        <entry key="protocolHandler"
+               value="com.sirius.upns.server.node.engine.endpoint.ProtocolHandler"/>
+    </util:map>
+
+</beans>

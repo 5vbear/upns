@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="no" default-lazy-init="false">
+
+    <bean id="ctu.upns.pubService" class="com.myctu.platform.gateway.agent.pubsub.redis.RedisPubService">
+        <!-- 服务名称 -->
+        <property name="name" value="ctu.upns.pubService"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.pubsub.redisClient"/>
+    </bean>
+
+    <bean id="ctu.upns.subService" class="com.myctu.platform.gateway.agent.pubsub.redis.RedisSubService">
+        <!-- 服务名称 -->
+        <property name="name" value="ctu.upns.subService"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.pubsub.redisClient"/>
+    </bean>
+</beans>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="no" default-lazy-init="false">
+
+    <!-- timeline queue -->
+    <bean id="ctu.upns.queue.timeline.productor"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueProductor"
+          init-method="init">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.timeline"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+
+    <bean id="ctu.upns.queue.timeline.listener"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueListener"
+          init-method="start" destroy-method="stop">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.timeline"/>
+        <!-- 消息消费者 -->
+        <property name="consumer" ref="ctu.upns.queue.timeline.consumer"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+
+    <!-- ack queue -->
+    <bean id="ctu.upns.queue.message.ack.productor"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueProductor"
+          init-method="init">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.message.ack"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+
+    <bean id="ctu.upns.queue.message.ack.listener"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueListener"
+          init-method="start" destroy-method="stop">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.message.ack"/>
+        <!-- 消息消费者 -->
+        <property name="consumer" ref="ctu.upns.queue.message.ack.consumer"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+
+    <!-- apple push queue -->
+    <bean id="ctu.upns.queue.apple.push.productor"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueProductor"
+          init-method="init">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.apple.push"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+
+    <bean id="ctu.upns.queue.apple.push.listener"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueListener"
+          init-method="start" destroy-method="stop">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.apple.push"/>
+        <!-- 消息消费者 -->
+        <property name="consumer" ref="ctu.upns.queue.apple.push.consumer"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+
+    <!-- apple broadcast queue -->
+    <bean id="ctu.upns.queue.apple.broadcast.productor"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueProductor"
+          init-method="init">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.apple.broadcast"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+
+    <bean id="ctu.upns.queue.apple.broadcast.listener"
+          class="com.myctu.platform.gateway.agent.queue.redis.RedisQueueListener"
+          init-method="start" destroy-method="stop">
+        <!-- 队列名称 -->
+        <property name="queueName" value="ctu.upns.queue.apple.broadcast"/>
+        <!-- 消息消费者 -->
+        <property name="consumer" ref="ctu.upns.queue.apple.broadcast.consumer"/>
+        <!-- redis客户端 -->
+        <property name="redisClient" ref="ctu.application.queue.redisClient"/>
+    </bean>
+</beans>

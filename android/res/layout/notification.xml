@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:padding="4dp">
+    <ImageView android:id="@+id/applicationView"
+              android:layout_width="48dp"
+              android:layout_height="48dp"
+              android:gravity="center"
+              android:layout_centerVertical="true"
+              android:layout_alignParentLeft="true"/>
+
+    <TextView android:id="@+id/receiveTimeView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+              android:layout_alignParentRight="true"/>
+
+    <TextView android:id="@+id/titleView"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:textColor="@color/white"
+              android:textSize="18sp"
+              android:layout_marginTop="4dp"
+              android:layout_toLeftOf="@id/receiveTimeView"
+              android:layout_toRightOf="@id/applicationView"
+              android:layout_marginLeft="8dp"/>
+
+    <TextView android:id="@+id/contentView"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:textSize="14sp"
+              android:ellipsize="end"
+              android:singleLine="true"
+              android:layout_toLeftOf="@id/receiveTimeView"
+              android:layout_toRightOf="@id/applicationView"
+              android:layout_below="@id/titleView"
+              android:layout_marginLeft="8dp"/>
+</RelativeLayout>

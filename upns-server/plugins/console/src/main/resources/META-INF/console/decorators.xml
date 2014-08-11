@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE decorators[
+        <!ELEMENT decorators (excludes?, decorator+)>
+        <!ATTLIST decorators defaultdir CDATA #IMPLIED>
+        <!ELEMENT excludes (pattern*)>
+        <!ELEMENT decorator (pattern*)>
+        <!ATTLIST decorator
+                name CDATA #REQUIRED
+                page CDATA  #IMPLIED
+                webapp CDATA  #IMPLIED
+                >
+        <!ELEMENT pattern (#PCDATA)>
+        ]>
+
+<decorators defaultdir="/console/layout">
+
+    <decorator name="dialog" page="dialog.ftl">
+        <pattern>/*.dlg</pattern>
+    </decorator>
+
+    <decorator name="default" page="default.ftl">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>

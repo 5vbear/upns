@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="no" default-lazy-init="false">
+
+    <!--<bean id="appleNotificationServer" class="javapns.notification.AppleNotificationServerBasicImpl">-->
+    <!--<constructor-arg name="keystore" index="0" value="classpath*:${ctu.upns.server.node.apns.keystore}"/>-->
+    <!--<constructor-arg name="password" index="1" value="${ctu.upns.server.node.apns.password}"/>-->
+    <!--<constructor-arg name="type" index="2" value="PKCS12"/>-->
+    <!--<constructor-arg name="host" index="3" value="${ctu.upns.server.node.apns.host}"/>-->
+    <!--<constructor-arg name="port" index="4" value="${ctu.upns.server.node.apns.port}"/>-->
+    <!--</bean>-->
+
+
+    <!--<bean id="tca.notificationTemplate"-->
+          <!--class="com.telecom.ctu.platform.components.upns.server.node.engine.apns.PushNotificationTemplate">-->
+        <!--<constructor-arg>-->
+            <!--<bean class="com.telecom.ctu.platform.components.upns.server.node.engine.apns.AppleNotificationServerFactoryBean">-->
+                <!--<property name="host" value="${ctu.upns.server.node.apns.host}"/>-->
+                <!--<property name="port" value="${ctu.upns.server.node.apns.port}"/>-->
+                <!--<property name="type" value="PKCS12"/>-->
+                <!--&lt;!&ndash;证书文件名和密码就安装约定吧,不在配置文件里面体现了&ndash;&gt;-->
+                <!--<property name="keystore" value="/tca.apns.p12"/>-->
+                <!--<property name="password" value="1"/>-->
+            <!--</bean>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
+
+    <!--<util:map id="ctu.upns.apnsTemplate">-->
+        <!--<entry key="60001" value-ref="tca.notificationTemplate"/>-->
+    <!--</util:map>-->
+
+</beans>

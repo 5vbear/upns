@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sirius</groupId>
+        <artifactId>upns</artifactId>
+        <version>2014-03-22</version>
+    </parent>
+
+    <groupId>com.sirius.upns</groupId>
+    <artifactId>upns-server</artifactId>
+    <packaging>pom</packaging>
+    <version>2014-06-27</version>
+
+    <modules>
+        <module>bom</module>
+        <module>plugins</module>
+        <module>integration</module>
+    </modules>
+
+    <properties>
+        <project.jdk.version>1.7</project.jdk.version>
+        <project.source.encoding>UTF-8</project.source.encoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>myctu.repository.snapshot</id>
+            <url>http://218.1.73.6/nexus/content/repositories/snapshot</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>myctu.repository.release</id>
+            <url>http://218.1.73.6/nexus/content/repositories/release</url>
+        </repository>
+    </repositories>
+</project>

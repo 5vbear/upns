@@ -1,0 +1,107 @@
+##env define
+application_launcher='com.telecom.ctu.platform.framework.engine.ApplicationEngine'
+application_name="upns-server"
+deploy_target="/opt/applications/$application_name"
+subversion_root="https://218.83.175.166/svn/projects/platform/components/upns/code"
+subversion_trunk=upns-server/integration
+
+##command function
+start(){
+    profile=${1:-dev};
+    server_root=`pwd`
+        classpath="$server_root/profile/$profile:$server_root/resources:$server_root/components/*:$server_root/lib/*"
+
+	echo "start $application_name"
+	chmod +x $server_root/profile/$profile/launcher
+	chmod +x $server_root/shell
+	$server_root/profile/$profile/launcher $classpath $application_launcher $application_name $profile
+}
+
+stop(){
+	profile=${1:-dev};
+	PID=`ps -ef | grep $application_launcher | grep $application_name | grep $profile | grep -v ' grep' | awk '{print $2}'`
+	if [ ! -e $PID ]
+	then
+	        echo "kill $application_name PID is $PID"
+	        kill $PID
+	else
+	        echo "$application_name not run"
+	fi
+}
+
+package(){
+    profile=${1:-dev}
+	tag=${2:-trunk}
+
+	case $tag in
+		trunk)
+			svn sw $subversion_root/trunk/$subversion_trunk .
+		;;
+		*)
+			svn sw $subversion_root/tags/$tag .
+		;;
+	esac
+
+	svn info > svn.info
+	mvn clean package assembly:assembly -P$profile
+}
+
+install(){
+	rm -rf $deploy_target
+	echo "[$deploy_target] has being deleted"
+	mkdir  $deploy_target
+	tar -zxvf target/$application_name.tar.gz -C $deploy_target
+}
+
+#input command
+command=${1:-help}
+shift
+
+#command args
+args=$*
+
+echo "the command is [$command]"
+echo "the args is [$args]"
+
+case $command in
+	start)
+		start $args
+	;;
+
+	stop)
+		stop  $args
+	;;
+
+	restart)
+		stop  $args
+		sleep 1m
+		start $args
+	;;
+
+	package)
+		package $args
+	;;
+
+	install)
+		install
+	;;
+
+	deploy)
+		stop    $1
+		package $1 $2
+
+		install
+
+		cd      $deploy_target
+		start   $1
+	;;
+
+	*)
+		echo "start---->启动服务------>命令格式:[start profile]"
+		echo "stop----->停止服务------>命令格式:[stop profile]"
+		echo "restart-->重启服务------>命令格式:[restart profile]"
+		echo "package-->更新打包------>命令格式:[package profile tag]---------->创建安装包:[`pwd`/target/$application_name.tar.gz]"
+		echo "install-->安装服务------>命令格式:[install]-------------->安装至:[$deploy_target]"
+		echo "deploy--->安装重启------>命令格式:[deploy profile tag]--->如果tag为空,那么使用trunk下源码打包启动"
+	;;
+esac

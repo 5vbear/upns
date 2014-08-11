@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.sirius.upns.upns-server</groupId>
+        <artifactId>plugins</artifactId>
+        <version>2014-06-27</version>
+    </parent>
+
+    <artifactId>multiplex</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1</version>
+
+    <dependencies>
+
+    </dependencies>
+
+    <build>
+        <sourceDirectory>${basedir}/src/main/nodejs</sourceDirectory>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>myctu.repository.snapshot</id>
+            <url>http://218.1.73.6/nexus/content/repositories/snapshot</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>myctu.repository.release</id>
+            <url>http://218.1.73.6/nexus/content/repositories/release</url>
+        </repository>
+    </repositories>
+
+</project>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2010 www.myctu.cn. All rights reserved.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="no" default-lazy-init="false">
+
+    <!-- cache support -->
+    <bean id="ctu.application.redisCacheService"
+          class="com.myctu.platform.gateway.agent.cache.redis.RedisCacheServiceFactoryBean">
+        <property name="cacheName" value="ctu.application.remote.cache"/>
+        <property name="redisClient" ref="ctu.application.cache.redisClient"/>
+    </bean>
+
+    <bean id="ctu.application.cache.redisClient"
+          class="com.myctu.platform.gateway.agent.cache.redis.RedisClientFactoryBean">
+        <!-- 集群使用方的app_id -->
+        <property name="invoker" value="${ctu.app.id}"/>
+        <!-- redis cache集群的提供者id固定为5 -->
+        <property name="provider" value="5"/>
+        <!-- 网关上配置的集群名称 -->
+        <property name="service_name" value="${ctu.application.cache.service.name}"/>
+        <!-- 网关地址 -->
+        <property name="gateway_uri" value="${ctu.gateway.uri}"/>
+        <!-- 如果网关访问不到,或者网关上取不到集群配置,那么使用下面配置直接连接redis -->
+        <property name="default_host" value="${ctu.cache.redis.default.host}"/>
+        <property name="default_port" value="${ctu.cache.redis.default.port}"/>
+        <property name="default_dbindex" value="${ctu.cache.redis.default.db}"/>
+    </bean>
+
+    <!-- pubsub support -->
+    <bean id="ctu.application.pubsub.redisClient"
+          class="com.myctu.platform.gateway.agent.cache.redis.RedisClientFactoryBean">
+        <!-- 集群使用方的app_id -->
+        <property name="invoker" value="${ctu.app.id}"/>
+        <!-- redis pubsub集群的提供者id固定为3 -->
+        <property name="provider" value="3"/>
+        <!-- 网关上配置的集群名称 -->
+        <property name="service_name" value="${ctu.application.pubsub.service.name}"/>
+        <!-- 网关地址 -->
+        <property name="gateway_uri" value="${ctu.gateway.uri}"/>
+        <!-- 如果网关访问不到,或者网关上取不到集群配置,那么使用下面配置直接连接redis -->
+        <property name="default_host" value="${ctu.cache.redis.default.host}"/>
+        <property name="default_port" value="${ctu.cache.redis.default.port}"/>
+        <property name="default_dbindex" value="${ctu.cache.redis.default.db}"/>
+    </bean>
+
+
+    <!-- queue support -->
+    <bean id="ctu.application.queue.redisClient"
+          class="com.myctu.platform.gateway.agent.cache.redis.RedisClientFactoryBean">
+        <!-- 当前应用的app_id -->
+        <property name="invoker" value="${ctu.app.id}"/>
+        <!-- redis queue集群的提供者id固定为4 -->
+        <property name="provider" value="4"/>
+        <!-- 网关上配置的集群名称 -->
+        <property name="service_name" value="${ctu.application.queue.service.name}"/>
+        <!-- 网关地址 -->
+        <property name="gateway_uri" value="${ctu.gateway.uri}"/>
+        <!-- 如果网关访问不到,或者网关上取不到集群配置,那么使用下面配置直接连接redis -->
+        <property name="default_host" value="${ctu.cache.redis.default.host}"/>
+        <property name="default_port" value="${ctu.cache.redis.default.port}"/>
+        <property name="default_dbindex" value="${ctu.cache.redis.default.db}"/>
+    </bean>
+
+</beans>

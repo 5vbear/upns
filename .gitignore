@@ -1,34 +1,11 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-
-pids
-logs
-results
-
-npm-debug.log
-
-.idea
 
 .DS_Store
-
+.idea
+*.iml
 .project
 .settings
 .classpath
-
 target
 
-*.iml
+
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user -->
+<!-- -->
+<!-- For professional support please see -->
+<!-- http://www.qos.ch/shop/products/professionalSupport -->
+<configuration scan="false">
+
+	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/opt/applications/logs/upns-server.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ssS} %5p [%c{5}#%M]:%L-%m%n%caller{0}</pattern>
+		</encoder>
+		<prudent>false</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>/opt/applications/logs/upns-server.%d{yyyy-MM-dd-HH}.log.gz
+			</fileNamePattern>
+			<!-- keep 24*30 hour' worth of history -->
+			<maxHistory>720</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="logfile" />
+	</root>
+
+	<!-- <logger name="com.telecom.ctu.platform.common.cache.redis" level="trace" /> -->
+	<logger name="org.apache.commons.pool.impl._DBBaseShardedJedisPool" level="trace" />
+	<logger name="upns.subscriber.ping" level="trace" />
+	<logger name="upns.subscriber.pong" level="trace" />
+
+	<logger name="com.myctu" level="debug" />
+	<logger name="com.telecom" level="debug" />
+	<logger name="redis.clients.jedis.socket" level="debug" />
+
+</configuration>
