@@ -1,6 +1,6 @@
-Unified Push Notification Serivce for IOS/Android/Websocket Device
-为IOS,Android,Web提供的统一消息推送服务
-It's based on [netty](http://netty.io/) and [redis](http://redis.io/).
+Unified Push Notification Serivce for IOS/Android/Websocket Device.<br/>
+为IOS,Android,Web提供的统一消息推送服务.<br/>
+It's based on [netty](http://netty.io/) and [redis](http://redis.io/).<br/>
     
 ##The service contain
     1) tcp server for android device
